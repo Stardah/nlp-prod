@@ -1,9 +1,7 @@
-import sys
-
 from flask import Flask, request, flash
 from flask import render_template
 
-from nlp import NLP_model
+from ml.nlp import NLP_model
 
 app = Flask(__name__)
 app.secret_key = 'secret key'

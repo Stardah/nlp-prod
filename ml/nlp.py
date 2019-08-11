@@ -1,5 +1,3 @@
-import warnings  # current version of seaborn generates a bunch of warnings that we'll ignore
-
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -13,11 +11,10 @@ import collections as co
 
 import os
 
-from classifier import TextCF
+from ml.classifier import TextCF
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 import lightgbm as lgb
-from sklearn.metrics import accuracy_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
