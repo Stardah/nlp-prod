@@ -1,4 +1,5 @@
 import collections as co
+import pickle
 
 import lightgbm as lgb
 import nltk
@@ -16,9 +17,16 @@ class NLP_model():
     def __init__(self):
         print('woob woob')
         df = pd.read_csv('./data/sent_df_prep.csv')
-        #df['sentiment'] = [1 if x == 1 else 0 for x in df['sentiment']]
-        #df = self.preprocess_data(df)
-        self.fit_model(df)
+
+        self.load_model()
+        #self.fit_model(df)
+        #self.save_model(self.model)
+
+    def save_model(self, model):
+        pickle.dump(model, open('./data/model.sav', 'wb'))
+
+    def load_model(self):
+        self.model = pickle.load(open('./data/model.sav', 'rb'))
 
     def preprocess_data(self, df):
         df['text'] = df['text'].str.replace("\n", " ")
@@ -46,9 +54,9 @@ class NLP_model():
         return df
 
     def fit_model(self, df):
-        X_train, X_test, y_train, y_test = train_test_split(df['text'], df['sentiment'], test_size=0.3, random_state=42)
+        #X_train, X_test, y_train, y_test = train_test_split(df['text'], df['sentiment'], test_size=0.3, random_state=42)
         textCF = TextCF()
-        textCF.fit(X_train, y_train)
+        textCF.fit(df['text'], df['sentiment'])
         self.model = textCF
 
     def define_stop_words(self, text_arrays):
