@@ -31,7 +31,7 @@ write_answer('self0', 'example_answer')
 class NLP_model():
 
     def __init__(self):
-        df = pd.read_csv('./sent_df_prep.csv')
+        df = pd.read_csv('./data/sent_df_prep.csv')
         #df['sentiment'] = [1 if x == 1 else 0 for x in df['sentiment']]
         #df = self.preprocess_data(df)
         self.fit_model(df)
@@ -101,7 +101,7 @@ class NLP_model():
         self.stop_words = stop_words
 
     def prepare_dataset(self, samples=10000):
-        df = pd.read_csv('./df.csv')
+        df = pd.read_csv('./data/df.csv')
         df = df.sample(10000)
 
         # оставим в выборке только положительние или отрицательные текста
