@@ -28,5 +28,4 @@ def check():
     return render_template('base.html', words = sentence)
 
 if __name__ == '__main__':
-    #sess.init_app(app)
     app.run()
