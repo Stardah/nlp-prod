@@ -37,6 +37,7 @@ def get_message():
 @app.route('/tolmachev_best')
 def jeez():
     print(request.values, file=sys.stdout)
+
     number = request.form['number']
     result = 1
     for digit in str(number):
