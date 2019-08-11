@@ -20,12 +20,15 @@ def check():
     #print(request.data, file=sys.stdout)
     sentence = request.form['content']
     prediction = model.predict([str(sentence)])
-    if prediction:
-        answer = 'Позитивное предложение :)'
+    if prediction == 1:
+        answer = 'Позитивное высказывание :)'
         flash(answer, 'flash')
-    else:
-        answer = 'Нагативное предложение :('
+    elif prediction == 2:
+        answer = 'Нагативное высказывание :('
         flash(answer, 'error')
+    else:
+        answer = 'Нейтральное высказывание ¯\_(ツ)_/¯'
+        flash(answer, 'norm')
     return render_template('base.html', words = sentence)
 
 @app.route('/get_message', methods=['GET', 'POST'])
