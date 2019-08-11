@@ -1,24 +1,20 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} NLP </title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Welcome to the best production server! Have a nice day :)</h1>
-</nav>
 <section class="content">
   <header>
-    {% block header %}{% endblock %}
+    {% block header %}Oh, Hi Alexander!{% endblock %}
   </header>
+  {% block content %}
+      <form action="/check" method="post">
+          <label for="sentence">Sentence</label>
+          <input name="content" id="sentence" required value="{{ words }}">
+          <input type="submit" value="Check">
+      </form>
+  {% endblock %}
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% for category, message in messages %}
     <div class="{{ category }}">{{ message }}</div>
   {% endfor %}
 {% endwith %}
-
-  {% block content %}
-      <form action="/check" method="post">
-          <label for="sentence">Sentence</label>
-          <input name="sentence" id="sentence" required value="{{ words }}">
-          <input type="submit" value="Check">
-      </form>
-  {% endblock %}
 </section>

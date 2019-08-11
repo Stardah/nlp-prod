@@ -1,3 +1,6 @@
+import json
+import sys
+
 from flask import Flask, request, flash
 from flask import render_template
 
@@ -14,7 +17,8 @@ def hello_world():
 
 @app.route('/check', methods=['GET', 'POST'])
 def check():
-    sentence = request.form['sentence']
+    #print(request.data, file=sys.stdout)
+    sentence = request.form['content']
     prediction = model.predict([str(sentence)])
     if prediction:
         answer = 'Позитивное предложение :)'
@@ -22,10 +26,23 @@ def check():
     else:
         answer = 'Нагативное предложение :('
         flash(answer, 'error')
-        #.flash { margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
-
-
     return render_template('base.html', words = sentence)
+
+@app.route('/get_message', methods=['GET', 'POST'])
+def get_message():
+    sentence = request.form['content']
+    prediction = model.predict([str(sentence)])
+    return json.dumps({'prediction':int(prediction[0])})
+
+@app.route('/tolmachev_best')
+def jeez():
+    print(request.values, file=sys.stdout)
+    number = request.form['number']
+    result = 1
+    for digit in str(number):
+        result *= int(digit)
+
+    return json.dumps({'tolmachev_best_result':result})
 
 if __name__ == '__main__':
     app.run()

@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import SGDClassifier, LogisticRegression
 from sklearn.pipeline import Pipeline
 
 
@@ -14,9 +14,7 @@ class TextCF:
         self.text_clf = Pipeline([
             ('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
-            ('clf', SGDClassifier(loss='log', penalty='l2',
-                                  alpha=1e-3, random_state=42,
-                                  max_iter=5, tol=None)),
+            ('clf',  LogisticRegression(random_state=0, solver='lbfgs')),
         ])
 
     def fit(self, X_train, y_train):
@@ -29,3 +27,16 @@ class TextCF:
     def predict_proba(self, X_test):
         self.proba = self.text_clf.predict_proba(X_test)
         return self.proba
+
+
+class FeatureGen():
+    def fit(self, X, y):
+        return self
+
+    def transform(self, X):
+        import pandas as pd
+        features = pd.DataFrame(X.str.count('\w+-?\w+').values, columns=['cnt'])
+        features['cnt_!'] = X.str.count('\!').values
+        features['cnt_?'] = X.str.count('\?').values
+        features['cnt_.'] = X.str.count('\.').values
+        return features

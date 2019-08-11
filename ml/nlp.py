@@ -1,36 +1,20 @@
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from nltk.stem.snowball import RussianStemmer
-
-# warnings.filterwarnings("ignore")
-
-# Use nltk for valid words
-import nltk
 import collections as co
 
-import os
+import lightgbm as lgb
+import nltk
+import numpy as np
+import pandas as pd
+from nltk.stem.snowball import RussianStemmer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
 
 from ml.classifier import TextCF
-
-os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
-import lightgbm as lgb
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-
-def write_answer(file_name, answer):
-    # file = open('./results/' + str(file_name) + '.txt', 'w')
-    # file.write(str(answer))
-    # file.close()
-    print('woob woob')
-
-
-write_answer('self0', 'example_answer')
 
 
 class NLP_model():
 
     def __init__(self):
+        print('woob woob')
         df = pd.read_csv('./data/sent_df_prep.csv')
         #df['sentiment'] = [1 if x == 1 else 0 for x in df['sentiment']]
         #df = self.preprocess_data(df)
