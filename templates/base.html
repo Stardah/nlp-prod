@@ -22,7 +22,7 @@
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Введите хоть что-нибудь">
 						<span class="label-input100">Высказывание</span>
-						<input class="input100" type="text" name="content" placeholder="очень положительный отзыв...">
+						<input class="input100 p-l-55" type="text" name="content" placeholder="очень положительный отзыв..." value = "{{ words }}">
 						<span class="focus-input100" data-symbol="&#128172;"></span>
 					</div>
 
@@ -38,12 +38,5 @@
 			</div>
 		</div>
 	</div>
-      <!--
-      <form action="/check" method="post">
-          <label for="sentence">Sentence</label>
-          <input name="content" id="sentence" required value="{{ words }}">
-          <input type="submit" value="Check">
-      </form>
-      -->
   {% endblock %}
 </section>

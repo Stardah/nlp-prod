@@ -16,7 +16,7 @@ class NLP_model():
 
     def __init__(self):
         print('woob woob')
-        df = pd.read_csv('./data/sent_df_prep.csv')
+        #df = pd.read_csv('./data/sent_df_prep.csv')
 
         self.load_model()
         #self.fit_model(df)
