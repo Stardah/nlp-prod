@@ -7,6 +7,6 @@ scipy==1.2.1
 six==1.12.0
 stop-words==2018.7.23
 Flask==0.10.1
-Jinja2==2.8
+Jinja2==2.11.3
 nltk==3.4.4
 gunicorn==19.9.0
